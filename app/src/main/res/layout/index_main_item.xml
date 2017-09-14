@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <ImageView
+        android:id="@+id/index_img"
+        style="@style/forecast_items"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:scaleType="centerInside"/>
+
+    <com.zhixin.myview.MyTextView
+        android:id="@+id/index_title"
+        style="@style/TextViewIndexValue"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/index_img"
+        android:gravity="center"
+        weather:typeface="fonts/hwhk.ttf" />
+
+    <View
+        android:id="@+id/dot_line"
+        style="@style/dot_line"
+        android:layout_height="2dp"
+        android:layout_toRightOf="@id/index_img"
+        android:layout_below="@id/index_title" />
+
+    <com.zhixin.myview.MyTextView
+        android:id="@+id/index_zs"
+        style="@style/TextViewIndexContent"
+        android:layout_below="@id/dot_line"
+        android:layout_toRightOf="@id/index_img"
+        android:gravity="center"
+        weather:typeface="fonts/hwhk.ttf" />
+
+    <View
+        android:id="@+id/dot_line1"
+        style="@style/dot_line"
+        android:layout_height="2dp"
+        android:layout_below="@id/index_img" />
+
+    <com.zhixin.myview.MyTextView
+        android:id="@+id/index_des"
+        style="@style/TextViewIndexContent"
+        android:layout_alignRight="@id/dot_line"
+        android:layout_alignLeft="@id/dot_line1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/dot_line1"
+        android:gravity="center_vertical"
+        weather:typeface="fonts/hwhk.ttf" />
+
+</RelativeLayout>

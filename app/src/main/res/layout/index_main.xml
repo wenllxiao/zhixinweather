@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/pm_shape" >
+
+    <com.zhixin.myview.MyTextView
+        android:id="@+id/index_text"
+        style="@style/TextViewStyle1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:text="指数"
+        android:textSize="@dimen/text_designer"
+        weather:typeface="fonts/hwhk.ttf" />
+
+    <View
+        android:id="@+id/solid_line"
+        style="@style/solid_line"
+        android:layout_height="2dp"
+        android:layout_below="@id/index_text" />
+
+    <include
+        android:id="@+id/index_clothes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/solid_line"
+        layout="@layout/index_main_item" />
+
+    <View
+        android:id="@+id/dot_line1"
+        style="@style/dot_line"
+        android:layout_height="2dp"
+        android:layout_below="@id/index_clothes" />
+
+    <include
+        android:id="@+id/index_carcrash"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dot_line1"
+        layout="@layout/index_main_item" />
+
+    <View
+        android:id="@+id/dot_line2"
+        style="@style/dot_line"
+        android:layout_height="2dp"
+        android:layout_below="@id/index_carcrash" />
+
+    <include
+        android:id="@+id/index_tour"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dot_line2"
+        layout="@layout/index_main_item" />
+
+    <View
+        android:id="@+id/dot_line3"
+        style="@style/dot_line"
+        android:layout_height="2dp"
+        android:layout_below="@id/index_tour" />
+
+    <include
+        android:id="@+id/index_cold"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dot_line3"
+        layout="@layout/index_main_item" />
+
+    <View
+        android:id="@+id/dot_line4"
+        style="@style/dot_line"
+        android:layout_height="2dp"
+        android:layout_below="@id/index_cold" />
+
+    <include
+        android:id="@+id/index_sport"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dot_line4"
+        layout="@layout/index_main_item" />
+
+    <View
+        android:id="@+id/dot_line5"
+        style="@style/dot_line"
+        android:layout_height="2dp"
+        android:layout_below="@id/index_sport" />
+
+    <include
+        android:id="@+id/index_zyx"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dot_line5"
+        layout="@layout/index_main_item" />
+
+    <View
+        android:id="@+id/dot_line6"
+        style="@style/dot_line"
+        android:layout_height="2dp"
+        android:layout_below="@id/index_zyx" />
+
+    <com.zhixin.myview.MyTextView
+        style="@style/TextViewStyle1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dot_line6"
+        android:text="来源:中国天气网"
+        android:layout_marginRight="5dp"
+        android:textSize="@dimen/text_Location"
+        weather:typeface="fonts/hwhk.ttf" />
+
+</RelativeLayout>

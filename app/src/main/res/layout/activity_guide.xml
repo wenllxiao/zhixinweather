@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_guide"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixin.weather.GuideActivity">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/guide_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+    <!--水平线性布局放小圆点位于父视图底部-->
+    <LinearLayout
+        android:id="@+id/point_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/guide_margin">
+
+    </LinearLayout>
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guide_start"
+        android:padding="10dp"
+        android:textSize="25sp"
+        android:clickable="true"
+        android:text="立即体验"
+        android:layout_marginBottom="70dp"
+        android:onClick="startProgram"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/firstColor"
+        android:background="@drawable/guide_button_selector"
+        />
+</RelativeLayout>

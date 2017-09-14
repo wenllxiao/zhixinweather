@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/topbar_default_height"
+    android:background="@android:color/transparent" >
+
+    <ImageView
+        android:id="@+id/home_bar_Button"
+        android:layout_width="@dimen/topbar_icon_size"
+        android:layout_height="@dimen/topbar_icon_size"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="8dp"
+        android:clickable="true"
+        android:minHeight="@dimen/topbar_icon_size"
+        android:minWidth="@dimen/topbar_icon_size"
+        android:padding="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/topbar_home_selector" />
+
+    <ImageView
+        android:id="@+id/add_city_Button"
+        android:layout_width="@dimen/topbar_icon_size"
+        android:layout_height="@dimen/topbar_icon_size"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="8dp"
+        android:clickable="true"
+        android:minHeight="@dimen/topbar_icon_size"
+        android:minWidth="@dimen/topbar_icon_size"
+        android:padding="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/topbar_plus_selector" />
+
+    <ImageView
+        android:id="@+id/share_Button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@id/add_city_Button"
+        android:layout_alignTop="@id/add_city_Button"
+        android:layout_toLeftOf="@id/add_city_Button"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:src="@drawable/share_selector" />
+
+    <View
+        android:id="@+id/solid_lineid"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_toRightOf="@id/share_Button"
+        android:alpha="10"
+        android:background="@mipmap/divider" />
+
+    <com.zhixin.myview.MyTextView
+        android:id="@+id/location_city_textview"
+        style="@style/TextViewStyle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/main_city_name_bg"
+        android:gravity="center"
+        android:text="--"
+        weather:typeface="fonts/hwhk.ttf" />
+
+    <LinearLayout
+        android:id="@+id/indicator_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location_city_textview"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="-5dp"
+        android:orientation="horizontal" />
+
+    <ImageView
+        android:id="@+id/curr_loc_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/location_city_textview"
+        android:layout_alignTop="@id/location_city_textview"
+        android:layout_marginTop="-2.0dip"
+        android:layout_toLeftOf="@id/location_city_textview"
+        android:layout_toStartOf="@id/location_city_textview"
+        android:paddingRight="3.0dip"
+        android:paddingTop="3.0dip"
+        android:src="@mipmap/current_location"
+        android:visibility="gone" />
+
+</RelativeLayout>

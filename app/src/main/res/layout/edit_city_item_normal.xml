@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/delete_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edit_city_list_selector" >
+
+    <LinearLayout
+        android:id="@+id/layout_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical" >
+
+        <com.zhixin.myview.WeatherImageView
+            android:id="@+id/forecastday"
+            style="@style/TextViewStyle1"
+            android:paddingBottom="2dp"
+            android:paddingTop="3dp" />
+
+        <com.zhixin.myview.WeatherImageView
+            android:id="@+id/forecastnight"
+            style="@style/TextViewStyle1"
+            android:paddingBottom="2dp"
+            android:paddingTop="3dp" />
+    </LinearLayout>
+
+    <com.zhixin.myview.MyTextView
+        android:id="@+id/city_name"
+        style="@style/TextViewStyle1"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/layout_id"
+        android:text="__/__"
+        weather:typeface="fonts/hwhk.ttf" />
+
+    <com.zhixin.myview.MyTextView
+        android:id="@+id/temp_id"
+        style="@style/TextViewStyle1"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:text="__/__"
+        weather:typeface="fonts/hwhk.ttf" />
+
+</RelativeLayout>

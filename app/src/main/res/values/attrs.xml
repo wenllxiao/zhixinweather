@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TypefacedButton">
+       <attr name="font" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="TypefacedTextView">
+       <attr name="typeface" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+       <attr name="boderRadius" format="dimension"/>
+       <attr name="type" >
+      <enum name="cicrle" value="0"/>
+      <enum name="round" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhixin.myview.MyTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather="http://schemas.android.com/apk/res-auto"
+    android:textColor="#000000"
+    android:background="#ffcc99"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dip"
+    android:paddingRight="10.0dip"
+    android:paddingBottom="5dip"
+    android:textSize="20sp"
+    weather:typeface="fonts/fzlx.ttf" />

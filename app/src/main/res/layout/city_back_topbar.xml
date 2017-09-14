@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/pm_shape1" >
+
+    <ImageView
+        android:id="@+id/back_bar_Button"
+        android:layout_width="@dimen/topbar_icon_size"
+        android:layout_height="@dimen/topbar_icon_size"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:clickable="true"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/navagation_back_selector" />
+    
+    <com.zhixin.myview.MyTextView
+        android:id="@+id/top_title"
+        style="@style/TextViewStyle1"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:text="选择城市"
+        android:textSize="30sp"
+        weather:typeface="fonts/hwhk.ttf" />
+</RelativeLayout>

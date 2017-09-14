@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhixin.myview.MyTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:textColor="#99cc00"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/hot_city_selected_shape"
+    android:textSize="20sp"
+    android:padding="5dip"
+    weather:typeface="fonts/fzlx.ttf" />
+
+

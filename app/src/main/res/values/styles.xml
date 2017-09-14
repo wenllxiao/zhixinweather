@@ -1,0 +1,81 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="MyTitleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextViewParent">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TextViewStyle1" parent="@style/TextViewParent">
+        <item name="android:textSize">@dimen/text_lg</item>
+    </style>
+
+    <style name="TextViewIndexContent" parent="@style/TextViewParent">
+        <item name="android:textSize">@dimen/index_content</item>
+        <item name="android:singleLine">false</item>
+    </style>
+
+    <style name="TextViewIndexValue" parent="@style/TextViewIndexContent">
+        <item name="android:textSize">@dimen/index_value</item>
+    </style>
+    <!-- 自定义Progress -->
+    <style name="mProgress_circle">
+        <item name="android:indeterminateDrawable">@drawable/progressbar_circle_1</item>
+        <item name="android:minWidth">50dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:maxWidth">50dp</item>
+        <item name="android:maxHeight">50dp</item>
+    </style>
+
+    <style name="mRefresh_circle">
+        <item name="android:indeterminateDrawable">@drawable/progressbar_circle_2</item>
+        <item name="android:minWidth">@dimen/topbar_icon_size</item>
+        <item name="android:minHeight">@dimen/topbar_icon_size</item>
+        <item name="android:maxWidth">@dimen/topbar_icon_size</item>
+        <item name="android:maxHeight">@dimen/topbar_icon_size</item>
+    </style>
+
+    <style name="dot_line">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:background">@drawable/dot_line</item>
+    </style>
+
+    <style name="solid_line">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">@drawable/solid_line</item>
+    </style>
+
+    <style name="solid_line_vertical">
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:layout_width">2dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@drawable/solid_line_vertical</item>
+    </style>
+
+    <style name="forecast_items">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+</resources>

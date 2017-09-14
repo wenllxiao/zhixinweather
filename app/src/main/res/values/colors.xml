@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <drawable name="actionbar_background">#ff77d9</drawable>
+    <drawable name="activated_background_color">#f1a7ff</drawable>
+    <color name="firstColor">#38ADFF</color>
+    <color name="secondColor">#FF4444</color>
+    <color name="thirdColor">#B6DA53</color>
+    <color name="forthColor">#00FFFF</color>
+</resources>
