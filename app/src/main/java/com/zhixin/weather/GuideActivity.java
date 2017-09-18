@@ -120,7 +120,6 @@ public class GuideActivity extends Activity implements OnClickListener,OnPageCha
 
     /**
      * 通过点击事件来切换当前的页面
-     *
      * @param view
      */
     @Override

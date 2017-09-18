@@ -150,10 +150,11 @@ public class WeatherMainActivity extends Activity implements FragmentCallBack, V
 
                 @Override
                 public void onAnimationRepeat(Animation animation) {
-                }
 
+                }
                 @Override
                 public void onAnimationEnd(Animation animation) {
+                    locationView.setVisibility(View.INVISIBLE);
                     locationView.setVisibility(View.GONE);
                     // 如果是第一次进入应用，显示抽屉
                     // if (!mUserLearnedDrawer&&cityBean!=null) {

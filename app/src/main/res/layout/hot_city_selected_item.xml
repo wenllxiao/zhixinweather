@@ -9,6 +9,7 @@
     android:background="@drawable/hot_city_selected_shape"
     android:textSize="20sp"
     android:padding="5dip"
+    android:layout_marginTop="5dp"
     weather:typeface="fonts/fzlx.ttf" />
 
 

@@ -1,10 +1,10 @@
 package com.zhixin.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zhixin.bean.CityBean;
@@ -13,9 +13,21 @@ import com.zhixin.weather.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddCityAdapter extends BaseAdapter {
+public class AddCityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
     private List<CityBean> mHotCities;
     private LayoutInflater mLayoutInflater;
+
+    public static interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view);
+
+        void onItemLongClick(View view);
+    }
+
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
 
     public AddCityAdapter(Context mContext) {
         mHotCities = new ArrayList<CityBean>();
@@ -29,51 +41,42 @@ public class AddCityAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return mHotCities.size();
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return mHotCities.get(i);
-    }
-
-    @Override
     public long getItemId(int i) {
         return i;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder mViewHolder;
-        int type = getItemViewType(position);
-        if (convertView == null
-                || convertView.getTag(R.mipmap.heart_logo + type) == null) {
-            switch (type) {
-                case 1:
-                    convertView = mLayoutInflater.inflate(
-                            R.layout.hot_city_selected_item, parent, false);
-                    break;
-                case 0:
-                    convertView = mLayoutInflater.inflate(
-                            R.layout.hot_city_normal_item, parent, false);
-                    break;
-                default:
-                    break;
-            }
-            mViewHolder = buildHolder(convertView);
-            convertView.setTag(R.mipmap.heart_logo + type, mViewHolder);
-        } else {
-            mViewHolder = (ViewHolder) convertView
-                    .getTag(R.mipmap.heart_logo + type);
-        }
-        bindViewData(mViewHolder, position);
-        return convertView;
+    public int getItemCount() {
+        if (mHotCities.size() > 0)
+            return mHotCities.size();
+        else return 0;
     }
 
     @Override
-    public int getViewTypeCount() {
-        return 2;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        MyViewHolder mViewHolder;
+        View convertView;
+        if (viewType == 0) {
+            convertView = mLayoutInflater.inflate(
+                    R.layout.hot_city_normal_item, parent, false);
+            mViewHolder = new MyViewHolder(convertView);
+
+        } else {
+            convertView = mLayoutInflater.inflate(
+                    R.layout.hot_city_selected_item, parent, false);
+            mViewHolder = new MyViewHolder(convertView);
+
+        }
+        //给布局设置点击和长点击监听
+        convertView .setOnClickListener(this);
+        convertView .setOnLongClickListener(this);
+        return mViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        ((MyViewHolder)holder).cityView.setText(mHotCities.get(position).getCity());
     }
 
     @Override
@@ -81,17 +84,29 @@ public class AddCityAdapter extends BaseAdapter {
         return mHotCities.get(position).getIsSelected() == 1 ? 1 : 0;
     }
 
-    private class ViewHolder {
-        TextView cityView;
+    //点击事件回调
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(v);
+        }
     }
 
-    private ViewHolder buildHolder(View convertView) {
-        ViewHolder holder = new ViewHolder();
-        holder.cityView = (TextView) convertView;
-        return holder;
+    @Override
+    public boolean onLongClick(View v) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemLongClick(v);
+        }
+        return false;
     }
 
-    private void bindViewData(ViewHolder holder, int position) {
-        holder.cityView.setText(mHotCities.get(position).getCity());
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView cityView;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            cityView = (TextView) itemView;
+        }
     }
 }

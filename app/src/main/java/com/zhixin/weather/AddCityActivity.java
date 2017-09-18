@@ -1,49 +1,48 @@
 package com.zhixin.weather;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
-
-import com.way.ui.swipeback.SwipeBackActivity;
-import com.way.ui.swipeback.SwipeBackLayout;
-import com.way.ui.swipeback.SwipeBackLayout.SwipeListener;
-import com.zhixin.adapter.AddCityAdapter;
-import com.zhixin.bean.CityBean;
 import com.zhixin.bean.RequestDataBean;
 import com.zhixin.bean.ResponseWeather;
-import com.zhixin.db.CityDao;
-import com.zhixin.myview.MyTextView;
 import com.zhixin.utils.HttpRequestInfo;
 import com.zhixin.utils.NetUtils;
 import com.zhixin.utils.T;
 import com.zhixin.utils.WeatherInfoUtil;
+import com.way.ui.swipeback.SwipeBackActivity;
+import com.zhixin.adapter.AddCityAdapter;
+import com.zhixin.bean.CityBean;
+import com.zhixin.db.CityDao;
+import com.zhixin.myview.MyTextView;
 public class AddCityActivity extends SwipeBackActivity {
     private CityDao cityDao;
     private List<CityBean> hotCitys;
     private Button mSearchButton;
     private AddCityAdapter mAddCityAdapter;
     private MyTextView mCurrentCity;
-    private GridView mGridView;
+    private RecyclerView recyclerView;
     private MyTextView selectText;
     private EditText mSearchCity;
     private ImageView mbackbarButton;
     private String citName[];
     private boolean isSerach = false;
     private String selectCityName;
-
+    private ItemTouchHelper itemTouchHelper;
+    private GridLayoutManager mLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,16 +65,64 @@ public class AddCityActivity extends SwipeBackActivity {
         mCurrentCity = (MyTextView) findViewById(R.id.current_city);
         mSearchButton = (Button) findViewById(R.id.search_btn);
         mSearchButton.setOnClickListener(listener);
-        mGridView = (GridView) findViewById(R.id.add_city_gridview);
+        recyclerView = (RecyclerView) findViewById(R.id.grid_recycler);
         mSearchCity = (EditText) findViewById(R.id.search_city);
         mAddCityAdapter = new AddCityAdapter(AddCityActivity.this);
-        mGridView.setAdapter(mAddCityAdapter);
+        mLayoutManager=new GridLayoutManager(AddCityActivity.this,3,GridLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mAddCityAdapter);
         mbackbarButton = (ImageView) findViewById(R.id.back_bar_Button);
         mbackbarButton.setOnClickListener(listener);
-        mGridView.setOnItemClickListener(mListener);
+        setRecyclerListener();
+    }
+    private void setRecyclerListener() {
+            itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                int dragFlags = 0;
+                if (recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager || recyclerView.getLayoutManager() instanceof GridLayoutManager) {
+                    dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                }
+                return makeMovementFlags(dragFlags, 0);
+            }
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return true;
+            }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+            }
+            @Override
+            public boolean isLongPressDragEnabled() {
+                return true;
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+        mAddCityAdapter.setOnItemClickListener(new AddCityAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view) {
+                isSerach = false;
+                selectText = (MyTextView) view;
+                selectCityName = (String) selectText.getText();
+                selectCityName.trim();
+                CityBean cityBean = cityDao.InTmpCities(selectCityName);
+                if (cityBean == null) {
+                    cityDao.UpdateTmpCity(selectCityName);
+                    WeatherMainActivity.mWeatherMap.put(selectCityName,null);
+                    new MyTaskWeather(AddCityActivity.this).execute(selectCityName);
+                } else {
+                    T.showShort(AddCityActivity.this, "已经添加过不可重复添加");
+                }
+            }
+            @Override
+            public void onItemLongClick(View view) {
+                itemTouchHelper.startDrag(recyclerView.getChildViewHolder(view));
+            }
+        });
     }
 
-    OnClickListener listener = new OnClickListener() {
+    View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             // TODO Auto-generated method stub
@@ -98,46 +145,6 @@ public class AddCityActivity extends SwipeBackActivity {
             }
         }
     };
-    OnItemClickListener mListener = new OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-            // TODO Auto-generated method stub
-            isSerach = false;
-            selectText = (MyTextView) view;
-            selectCityName = (String) selectText.getText();
-            selectCityName.trim();
-            CityBean cityBean = cityDao.InTmpCities(selectCityName);
-            if (cityBean == null) {
-                cityDao.UpdateTmpCity(selectCityName);
-                WeatherMainActivity.mWeatherMap.put(selectCityName,null);
-                new MyTaskWeather(AddCityActivity.this).execute(selectCityName);
-            } else {
-                T.showShort(AddCityActivity.this, "已经添加过不可重复添加");
-            }
-        }
-    };
-
-    SwipeBackLayout.SwipeListener slistener = new SwipeListener() {
-
-        @Override
-        public void onScrollStateChange(int state, float scrollPercent) {
-            // TODO Auto-generated method stub
-
-        }
-
-        @Override
-        public void onScrollOverThreshold() {
-            // TODO Auto-generated method stub
-        }
-
-        @Override
-        public void onEdgeTouch(int edgeFlag) {
-            // TODO Auto-generated method stu
-            finish();
-        }
-    };
-
     @Override
     public void finish() {
         // TODO Auto-generated method stub
@@ -147,9 +154,11 @@ public class AddCityActivity extends SwipeBackActivity {
 
     public static class MyTaskWeather extends AsyncTask<String, Void, String> {
         private WeakReference<Context> weakReference;
+
         public MyTaskWeather(Context context) {
             weakReference = new WeakReference<>(context);
         }
+
         @Override
         protected String doInBackground(String... params) {
             // TODO Auto-generated method stub
@@ -164,10 +173,10 @@ public class AddCityActivity extends SwipeBackActivity {
                     ResponseWeather rw = new ResponseWeather();
                     rw = WeatherInfoUtil.getJresponseWeather();
                     // L.e("rw.getError" + rw.getError());
-                    if (rw.getError()!=null&&rw.getError().equals("0")) {
+                    if (rw.getError() != null && rw.getError().equals("0")) {
                         WeatherMainActivity.mWeatherMap.put(params[0], respones);
                         return "0";
-                    }else{
+                    } else {
                         return "999";
                     }
                 } catch (Exception e) {
@@ -225,9 +234,11 @@ public class AddCityActivity extends SwipeBackActivity {
 
     public static class MyTask extends AsyncTask<Void, Void, List<CityBean>> {
         private WeakReference<Context> weakReference;
+
         public MyTask(Context context) {
             weakReference = new WeakReference<>(context);
         }
+
         @Override
         protected void onPreExecute() {
             // TODO Auto-generated method stub
@@ -237,7 +248,7 @@ public class AddCityActivity extends SwipeBackActivity {
         @Override
         protected List<CityBean> doInBackground(Void... params) {
             // TODO Auto-generated method stub
-            AddCityActivity activity=(AddCityActivity)weakReference.get();
+            AddCityActivity activity = (AddCityActivity) weakReference.get();
             activity.hotCitys = activity.cityDao.getHotCities();
             return activity.hotCitys;
         }
@@ -246,7 +257,7 @@ public class AddCityActivity extends SwipeBackActivity {
         protected void onPostExecute(List<CityBean> result) {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
-            AddCityActivity activity=(AddCityActivity)weakReference.get();
+            AddCityActivity activity = (AddCityActivity) weakReference.get();
             activity.mAddCityAdapter.SetHotCitys(result);
         }
     }

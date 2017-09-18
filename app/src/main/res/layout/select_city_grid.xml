@@ -70,17 +70,24 @@
         style="@style/solid_line"
         android:layout_below="@+id/hot_city" />
 
-    <GridView
-        android:id="@+id/add_city_gridview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/line_solid"
-        android:listSelector="@android:color/transparent"
-        android:focusable="true"
-        android:scrollbars="none" 
-        android:gravity="center"
-        android:horizontalSpacing="10dp"
-        android:numColumns="3"
-        android:verticalSpacing="5dp" />
+    <!--<GridView-->
+        <!--android:id="@+id/add_city_gridview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/line_solid"-->
+        <!--android:listSelector="@android:color/transparent"-->
+        <!--android:focusable="true"-->
+        <!--android:scrollbars="none"-->
+        <!--android:gravity="center"-->
+        <!--android:horizontalSpacing="10dp"-->
+        <!--android:numColumns="3"-->
+        <!--android:verticalSpacing="5dp" />-->
+      <android.support.v7.widget.RecyclerView
+          android:layout_below="@id/line_solid"
+          android:gravity="center"
+          android:id="@+id/grid_recycler"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginLeft="15dp" />
 
 </RelativeLayout>

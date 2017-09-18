@@ -70,7 +70,7 @@ public class EditCityActivity extends SwipeBackActivity{
         @Override
         public void onScrollStateChange(int state, float scrollPercent) {
             // TODO Auto-generated method stub
-
+             Log.e("state:"+state,"scrollPercent:"+scrollPercent);
         }
 
         @Override
@@ -84,11 +84,9 @@ public class EditCityActivity extends SwipeBackActivity{
             // TODO Auto-generated method stub
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
-            L.e(TAG + currentID);
             bundle.putInt("currentID", currentID);
             intent.putExtras(bundle);
             setResult(1002, intent);
-            finish();
         }
     };
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
